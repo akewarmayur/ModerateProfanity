@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-from ultralytics import YOLO
 import os
 from moviepy.editor import *
 import moviepy.editor as mp
@@ -8,9 +7,9 @@ import gradio as gr
 import whisperx
 from difflib import SequenceMatcher
 import helperFiles.profaneWords as profaneWords
-import argparse
 
-device = "cuda"
+
+device = "cuda" #"cpu
 compute_type = "float16"
 whisper_model = whisperx.load_model("large-v2", device, compute_type=compute_type)
 
@@ -98,23 +97,15 @@ class Profanity:
         output_path = self.addBeep(input_video, "beepSound/bleep.mp3", profane_words, name_of_video)
         return output_path
 
-    # Define the input and output components
-    input_video = gr.inputs.Video(type="mp4", label="Input Video")
-    output_video = gr.outputs.File(label="Processed Video")
 
-    # Create the Gradio interface
-    interface = gr.Interface(fn=process_video, inputs=input_video,
-                             outputs=gr.Video(label="Redacted Video", format="mp4"))
+input_video = gr.inputs.Video(type="mp4", label="Input Video")
+output_video = gr.outputs.File(label="Processed Video")
 
-    interface.queue()
-    # Launch the interface
-    interface.launch(share=True)
+objT = Profanity()
+# Create the Gradio interface
+interface = gr.Interface(fn=objT.process_video, inputs=input_video,
+                         outputs=gr.Video(label="Redacted Video", format="mp4"))
 
-
-if __name__ == '__main__':
-    my_parser = argparse.ArgumentParser()
-    my_parser.add_argument('--file_path', action='store', type=str, required=True)
-    args = my_parser.parse_args()
-    file_path = args.file_path
-    objT = Profanity()
-    objT.process_video(file_path)
+interface.queue()
+# Launch the interface
+interface.launch(share=True, debug=True)
