@@ -25,8 +25,6 @@ python beepProfanityGradioApp.py
 
 ## Moderate Profanity (Text)
 * The input sentence or srt file will be moderated by comparing it with list of profane words.
-![image](https://github.com/akewarmayur/ModerateProfanity/assets/31464781/cd9c10d1-3e74-49b9-891b-bab99995b617)
-
 
 ```
 python textProfanity.py --input "sentence/srt_file"
@@ -34,3 +32,4 @@ python textProfanity.py --input "sentence/srt_file"
 * input : Can be a srt file, or a sentence
 
 ### Output
+![image](https://github.com/akewarmayur/ModerateProfanity/assets/31464781/cd9c10d1-3e74-49b9-891b-bab99995b617)
